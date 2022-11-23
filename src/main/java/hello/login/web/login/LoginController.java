@@ -1,7 +1,7 @@
-package hello.login.domain.login;
+package hello.login.web.login;
 
+import hello.login.domain.login.LoginService;
 import hello.login.domain.member.Member;
-import hello.login.web.login.LoginForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -40,14 +40,8 @@ public class LoginController {
         // 로그인 성공 처리
 
         // Cookie에 시간정보를 안주면 Session Cookie
-
-        for(int i = 0; i < 5; i++) {
-            Cookie cookie = new Cookie("memberId", String.valueOf(i));
-            response.addCookie(cookie);
-        }
-
-//        Cookie cookie = new Cookie("memberId", String.valueOf(login.getId()));
-//        response.addCookie(cookie);
+        Cookie cookie = new Cookie("memberId", String.valueOf(login.getId()));
+        response.addCookie(cookie);
 
         return "redirect:/";
     }
@@ -59,13 +53,9 @@ public class LoginController {
         return "redirect:/";
     }
 
-    /**
-     * cookie 만료시키기
-     * @param response
-     * @param cookieName
-     */
-    private void expireCookie(HttpServletResponse response, String cookieName) {
-        Cookie cookie = new Cookie(cookieName, null);
+    /** cookie 만료시키기 */
+    private void expireCookie(HttpServletResponse response, String memberId) {
+        Cookie cookie = new Cookie(memberId, null);
         cookie.setMaxAge(0); // 종료 날짜를 0으로 설정
 
         response.addCookie(cookie);
