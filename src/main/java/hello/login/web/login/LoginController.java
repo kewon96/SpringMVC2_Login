@@ -3,7 +3,6 @@ package hello.login.web.login;
 import hello.login.domain.login.LoginService;
 import hello.login.domain.member.Member;
 import hello.login.web.SessionConst;
-import hello.login.web.session.SessionManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -31,8 +30,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public String login(@Validated @ModelAttribute("loginForm") LoginForm form, BindingResult bindingResult,
-                        @RequestParam(defaultValue = "/") String redirectURL,
-                        HttpServletRequest request) {
+                        @RequestParam(defaultValue = "/") String redirectURL, HttpServletRequest request) {
         if(bindingResult.hasErrors()) return "login/loginForm";
 
         Member loginMember = service.login(form.getLoginId(), form.getPassword());
