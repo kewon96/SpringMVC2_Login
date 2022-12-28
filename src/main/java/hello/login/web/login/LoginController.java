@@ -3,7 +3,6 @@ package hello.login.web.login;
 import hello.login.domain.login.LoginService;
 import hello.login.domain.member.Member;
 import hello.login.web.SessionConst;
-import hello.login.web.session.SessionManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -12,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -29,7 +29,8 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login(@Validated @ModelAttribute("loginForm") LoginForm form, BindingResult bindingResult, HttpServletRequest request) {
+    public String login(@Validated @ModelAttribute("loginForm") LoginForm form, BindingResult bindingResult,
+                        @RequestParam(defaultValue = "/") String redirectURL, HttpServletRequest request) {
         if(bindingResult.hasErrors()) return "login/loginForm";
 
         Member loginMember = service.login(form.getLoginId(), form.getPassword());
@@ -47,7 +48,7 @@ public class LoginController {
         // session에 로그인 회원정보 보관
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
 
-        return "redirect:/";
+        return "redirect:" + redirectURL;
     }
 
     @PostMapping("/logout")

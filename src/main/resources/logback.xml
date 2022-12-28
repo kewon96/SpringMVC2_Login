@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- https://velog.io/@cho876/Springboot-LogBack-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0 -->
+<!-- https://bcho.tistory.com/1316 -->
+<configuration>
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
+                <timestampFormat>yyyy-MM-dd'T'HH:mm:ss.SSSX</timestampFormat>
+                <timestampFormatTimezoneId>Etc/UTC</timestampFormatTimezoneId>
+                <jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
+                    <prettyPrint>true</prettyPrint>
+                </jsonFormatter>
+            </layout>
+        </encoder>
+    </appender>
+
+    <!--<root level="info">
+        <appender-ref ref="stdout"/>
+    </root>-->
+    <!--<logger name="hello.login.web.filter" level="debug" additivity="false">
+        <appender-ref ref="stdout" />
+    </logger>-->
+    <logger name="hello.login.web.interceptor" level="debug" additivity="false">
+        <appender-ref ref="stdout" />
+    </logger>
+</configuration>
