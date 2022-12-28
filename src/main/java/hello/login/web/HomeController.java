@@ -1,6 +1,7 @@
 package hello.login.web;
 
 import hello.login.domain.member.Member;
+import hello.login.web.argument_resolver.Login;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,7 @@ public class HomeController {
      * @param model
      */
     @GetMapping("/")
-    public String homeLogin(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember, Model model)  {
+    public String homeLogin(@Login Member loginMember, Model model)  {
         if(loginMember == null) return "home";
 
         model.addAttribute("member", loginMember);

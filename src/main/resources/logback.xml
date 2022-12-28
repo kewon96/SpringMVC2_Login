@@ -21,7 +21,10 @@
     <!--<logger name="hello.login.web.filter" level="debug" additivity="false">
         <appender-ref ref="stdout" />
     </logger>-->
-    <logger name="hello.login.web.interceptor" level="debug" additivity="false">
+    <!--<logger name="hello.login.web.interceptor" level="debug" additivity="false">
+        <appender-ref ref="stdout" />
+    </logger>-->
+    <logger name="hello.login.web.argument_resolver" level="debug" additivity="false">
         <appender-ref ref="stdout" />
     </logger>
 </configuration>
